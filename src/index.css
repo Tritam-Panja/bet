@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-base: #0a0a0c;
+    --text-primary: #edebd6;
+    --text-muted: rgba(237, 235, 214, 0.55);
+    --accent: #d4ff3a;
+    --accent-light: #cfc6ff;
+    --border-line: rgba(255, 255, 255, 0.08);
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: 'Inter Tight', sans-serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+.font-mono-code {
+  font-family: 'Fragment Mono', 'JetBrains Mono', monospace;
+}
+
+.font-archivo {
+  font-family: 'Archivo', sans-serif;
+}
+
+.font-inter {
+  font-family: 'Inter Tight', sans-serif;
+}
+
+/* Lenis styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Smooth marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
