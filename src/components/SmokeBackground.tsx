@@ -98,29 +98,41 @@ void main(){
   float att = 1.0 / (1.0 + d * d * 22.0 / (uRadius * uRadius));
   att *= 1.0 - smoothstep(0.2, 0.95, d / uRadius);
   float dif = max(dot(n, ld), 0.0);
-  float spec = pow(max(dot(reflect(-ld, n), vec3(0.0, 0.0, 1.0)), 0.0), 48.0);
-  spec *= 0.12 + 0.88 * smoothstep(0.01, 0.2, 1.0 - n.z);
-  float cav = 0.55 + 0.45 * smoothstep(0.2, 0.8, h);
-  vec3 col = uLight * (dif * 0.28 + spec * 2.4) * att * cav;
-  col += uLight * 0.025 * exp(-d * d * 40.0 / (uRadius * uRadius));
+  float spec = pow(max(dot(reflect(-ld, n), vec3(0.0, 0.0, 1.0)), 0.0), 32.0);
+  spec *= 0.15 + 0.85 * smoothstep(0.01, 0.25, 1.0 - n.z);
+  float cav = 0.5 + 0.5 * smoothstep(0.15, 0.85, h);
+  
+  // Dynamic light following cursor
+  vec3 col = uLight * (dif * 0.45 + spec * 3.2) * att * cav;
+  col += uLight * 0.06 * exp(-d * d * 25.0 / (uRadius * uRadius));
+
+  // Ambient direction light to make smoke waves clearly visible even without cursor on them
   vec3 K = normalize(vec3(-0.4, 0.7, 0.6));
-  col += uLight * 0.16 * max(dot(n, K) - K.z, 0.0) * cav;
-  col += uLight * 0.05 * pow(max(dot(reflect(-K, n), vec3(0.0, 0.0, 1.0)), 0.0), 24.0) * cav;
-  float rim = pow(max(dot(n, normalize(vec3(-0.8, -0.6, 0.25))), 0.0), 3.0);
-  col += uAccent * rim * 0.035 * (0.3 + att);
+  col += uLight * 0.32 * max(dot(n, K) - K.z * 0.2, 0.0) * cav;
+  col += uLight * 0.12 * pow(max(dot(reflect(-K, n), vec3(0.0, 0.0, 1.0)), 0.0), 16.0) * cav;
+
+  // Opposite rim glow
+  float rim = pow(max(dot(n, normalize(vec3(-0.8, -0.6, 0.25))), 0.0), 2.5);
+  col += uAccent * rim * 0.08 * (0.4 + att);
+
+  // Soft atmospheric base ambient lift so dark smoke waves are defined
+  col += uLight * 0.045 * cav;
+
   if(uParticles > 0.5){
-    vec2 gp = s * 38.0;
-    gp.y -= uScroll * 0.02 * uParallax + t * 0.12;
+    vec2 gp = s * 45.0;
+    gp.y -= uScroll * 0.02 * uParallax + t * 0.14;
     vec2 id = floor(gp);
     vec2 f = fract(gp) - 0.5;
     float rnd = h2(id);
-    if(rnd < 0.06){
+    if(rnd < 0.08){
       vec2 o = vec2(h2(id + 3.1) - 0.5, h2(id + 7.7) - 0.5) * 0.6;
       vec2 q = f - o;
       q.y /= 1.0 + abs(uVel) * 7.0;
-      float sp = exp(-dot(q, q) * 420.0);
-      float tw = 0.5 + 0.5 * sin(t * 2.0 + rnd * 60.0);
-      col += mix(uLight, uAccent, step(0.04, rnd)) * sp * tw * (0.12 + att * 2.2);
+      float sp = exp(-dot(q, q) * 380.0);
+      float tw = 0.5 + 0.5 * sin(t * 2.5 + rnd * 60.0);
+      // Bright glowing particles (lime + lavender)
+      vec3 pCol = mix(uLight, uAccent, step(0.035, rnd));
+      col += pCol * sp * tw * (0.4 + att * 3.5);
     }
   }
   col *= uIntensity;
@@ -214,8 +226,11 @@ export const SmokeBackground: React.FC<SmokeBackgroundProps> = ({
     let lastTime = performance.now();
     let simTime = 8.0;
     let hasMoved = false;
+    // Mouse position in canvas coordinates with smooth physics
     const targetMouse = { x: 0, y: 0 };
     const currMouse = { x: 0, y: 0 };
+    const mouseVelocity = { x: 0, y: 0 };
+    let lastMousePos = { x: 0, y: 0 };
     let clientW = 1;
     let clientH = 1;
     let scrollY = window.scrollY;
@@ -239,11 +254,9 @@ export const SmokeBackground: React.FC<SmokeBackgroundProps> = ({
       gl.viewport(0, 0, canvas.width, canvas.height);
     };
 
-    const onPointerMove = (e: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const scaleX = clientW / Math.max(1, rect.width);
-      targetMouse.x = (e.clientX - rect.left) * scaleX;
-      targetMouse.y = clientH - (e.clientY - rect.top) * scaleX;
+    const onPointerMove = (e: MouseEvent | PointerEvent) => {
+      targetMouse.x = e.clientX;
+      targetMouse.y = clientH - e.clientY;
       hasMoved = true;
     };
 
@@ -257,6 +270,7 @@ export const SmokeBackground: React.FC<SmokeBackgroundProps> = ({
 
     window.addEventListener('resize', resize);
     window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('mousemove', onPointerMove, { passive: true });
     window.addEventListener('scroll', onScroll, { passive: true });
 
     const [bR, bG, bB] = parseColor(base);
@@ -276,9 +290,13 @@ export const SmokeBackground: React.FC<SmokeBackgroundProps> = ({
         targetMouse.y = clientH * (0.55 + 0.18 * Math.sin(simTime * 0.27 + 1.3));
       }
 
-      const lerpFactor = 1 - Math.pow(0.002, dt);
+      const lerpFactor = 1 - Math.pow(0.001, dt);
       currMouse.x += (targetMouse.x - currMouse.x) * lerpFactor;
       currMouse.y += (targetMouse.y - currMouse.y) * lerpFactor;
+
+      mouseVelocity.x = (currMouse.x - lastMousePos.x) / (dt || 0.016);
+      mouseVelocity.y = (currMouse.y - lastMousePos.y) / (dt || 0.016);
+      lastMousePos = { x: currMouse.x, y: currMouse.y };
 
       const targetVel = Math.max(-1, Math.min(1, (scrollY - lastScrollY) / 40));
       lastScrollY = scrollY;
@@ -310,6 +328,7 @@ export const SmokeBackground: React.FC<SmokeBackgroundProps> = ({
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', resize);
       window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('mousemove', onPointerMove);
       window.removeEventListener('scroll', onScroll);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };

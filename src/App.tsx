@@ -35,18 +35,18 @@ function App() {
     <div className="relative min-h-screen w-full bg-[#0a0a0c] text-[#edebd6] overflow-x-hidden selection:bg-[#d4ff3a] selection:text-[#0a0a0c]">
       {/* Interactive WebGL Smoke/Flow Background */}
       <SmokeBackground
-        quality={0.8}
+        quality={1.0}
         flow={1.0}
-        intensity={0.85}
-        radius={1.0}
-        scale={1.0}
+        intensity={1.5}
+        radius={1.4}
+        scale={1.1}
         parallax={1.0}
-        ripple={1.0}
+        ripple={1.2}
         particles={true}
-        grain={0.5}
-        base="rgb(10, 10, 12)"
-        light="rgb(207, 198, 255)"
-        accent="rgb(212, 255, 58)"
+        grain={0.35}
+        base="#0a0a0e"
+        light="#d4cbff"
+        accent="#d4ff3a"
       />
 
       {/* Adaptive Custom Cursor */}
