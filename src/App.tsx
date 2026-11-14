@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
-import { SmokeBackground } from './components/SmokeBackground';
+import { RingField } from './components/RingField';
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
@@ -32,21 +32,18 @@ function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen w-full bg-[#0a0a0c] text-[#edebd6] overflow-x-hidden selection:bg-[#d4ff3a] selection:text-[#0a0a0c]">
-      {/* Interactive WebGL Smoke/Flow Background */}
-      <SmokeBackground
-        quality={1.0}
-        flow={1.0}
-        intensity={1.5}
-        radius={1.4}
-        scale={1.1}
-        parallax={1.0}
-        ripple={1.2}
-        particles={true}
-        grain={0.35}
-        base="#0a0a0e"
-        light="#d4cbff"
-        accent="#d4ff3a"
+    <div className="relative min-h-screen w-full bg-transparent text-[#edebd6] overflow-x-hidden selection:bg-[#d4ff3a] selection:text-[#0a0a0c]">
+      {/* React Bits Pro - Ring Field: Realistic organic dust particles drifting outward */}
+      <RingField
+        innerColor="#d4ff3a"
+        outerColor="#cfc6ff"
+        backgroundColor="#08080a"
+        ringCount={9}
+        speed={0.8}
+        waveIntensity={1.2}
+        particleCount={340}
+        grain={0.3}
+        interactive={true}
       />
 
       {/* Adaptive Custom Cursor */}

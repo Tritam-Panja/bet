@@ -22,5 +22,21 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "files": [
+    "src/main.tsx",
+    "src/App.tsx",
+    "src/components/ClientTicker.tsx",
+    "src/components/ContactFooter.tsx",
+    "src/components/CustomCursor.tsx",
+    "src/components/FittedText.tsx",
+    "src/components/HeroSection.tsx",
+    "src/components/LiquidImage.tsx",
+    "src/components/Navbar.tsx",
+    "src/components/ServicesSection.tsx",
+    "src/components/RingField.tsx",
+    "src/components/SmokeBackground.tsx",
+    "src/components/StudioSection.tsx",
+    "src/components/WorkSection.tsx"
+  ],
+  "include": ["src/**/*"]
 }
