@@ -41,11 +41,11 @@ export const ContactFooter: React.FC = () => {
 
         <div className="mt-12 sm:mt-16">
           <a
-            href="mailto:hello@nocturno.studio"
+            href="mailto:hello@bet.studio"
             className="group inline-flex items-center gap-4 text-2xl sm:text-4xl md:text-5xl font-mono-code uppercase text-[#d4ff3a] hover:text-[#edebd6] transition-colors duration-300"
           >
             <span className="underline decoration-[#d4ff3a]/40 underline-offset-8">
-              hello@nocturno.studio
+              hello@bet.studio
             </span>
             <span className="inline-block transform group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-300">
               ↗
@@ -137,10 +137,10 @@ export const ContactFooter: React.FC = () => {
         </div>
       </div>
 
-      {/* Massive NOCTURNO Fitted Text Display */}
+      {/* Massive BET Fitted Text Display */}
       <div className="pt-24 sm:pt-36 pb-12 select-none overflow-hidden">
         <FittedText
-          text="NOCTURNO"
+          text="BET"
           color="rgba(237, 235, 214, 0.08)"
           letterSpacing={-0.05}
           lineHeight={0.78}
@@ -149,7 +149,7 @@ export const ContactFooter: React.FC = () => {
 
       {/* Copyright & Meta Bottom bar */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5 font-mono-code text-xs text-white/40">
-        <div>© 2026 Nocturno Studio. All rights reserved.</div>
+        <div>© 2026 BET. All rights reserved.</div>
         <div className="flex items-center gap-6">
           <span>WebGL • Three • Framer Motion</span>
           <span>Crafted with Precision</span>

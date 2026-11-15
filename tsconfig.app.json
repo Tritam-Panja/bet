@@ -36,7 +36,10 @@
     "src/components/RingField.tsx",
     "src/components/SmokeBackground.tsx",
     "src/components/StudioSection.tsx",
-    "src/components/WorkSection.tsx"
+    "src/components/WorkSection.tsx",
+    "src/components/Preloader.tsx",
+    "src/components/DecryptedText.tsx",
+    "src/components/ui/cipher-text-reveal.tsx"
   ],
   "include": ["src/**/*"]
 }

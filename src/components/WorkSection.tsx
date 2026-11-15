@@ -61,7 +61,7 @@ export const WorkSection: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 sm:mb-24">
         <div>
           <span className="font-mono-code text-xs uppercase tracking-widest text-[#d4ff3a] block mb-3">
-            Selected work
+            (03) — Selected work
           </span>
           <h2 className="font-archivo text-4xl sm:text-6xl md:text-7xl font-extrabold uppercase tracking-tight text-[#edebd6]">
             Case studies 2025 — 2026

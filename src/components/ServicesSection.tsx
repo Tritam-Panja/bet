@@ -4,27 +4,27 @@ import { motion } from 'framer-motion';
 const SERVICES = [
   {
     num: '01',
-    title: 'WebGL & 3D',
-    description: 'Real-time worlds that run smoothly in the browser. We model, light and optimise every scene so it loads fast and stays fluid on everyday devices.',
-    deliverables: ['Real-time 3D scenes', 'Product configurators', 'Shaders & particles', 'Performance tuning'],
+    title: 'WEBSITE',
+    description: 'We design and develop responsive websites and 3D experiences that help businesses present their ideas with clarity and impact. From intuitive layouts to interactive visuals, we create polished digital experiences that work smoothly across devices.',
+    deliverables: ['Responsive Web Design', '3D Experiences', 'Interactive Visuals', 'UI/UX Layouts'],
   },
   {
     num: '02',
-    title: 'Creative direction',
-    description: 'Concepts, art direction and visual systems. We shape the idea first and the look second, so every screen feels like part of one story.',
-    deliverables: ['Concept & narrative', 'Art direction', 'Visual identity', 'Design systems'],
+    title: 'SOFTWARE',
+    description: 'We develop ERP and CRM software tailored to your business workflows. By bringing operations, customer information and team processes together in one platform, our solutions help reduce manual work, improve coordination and support better decisions as your business grows.',
+    deliverables: ['Custom ERP Systems', 'Tailored CRM Solutions', 'Workflow Automation', 'Operations Management'],
   },
   {
     num: '03',
-    title: 'Motion & sound',
-    description: 'Cinematic transitions and spatial audio. Movement and sound are designed together, so each interaction feels physical instead of decorative.',
-    deliverables: ['Motion design', 'Scroll choreography', 'Sound design', 'Spatial audio'],
+    title: 'AI AUTOMATION',
+    description: 'We create AI-powered automations that handle repetitive tasks, connect business tools and speed up everyday workflows. Tailored to your needs, they help teams save time and focus on work that requires human attention.',
+    deliverables: ['AI Workflow Agents', 'Tool Integrations', 'Task Automation', 'Intelligent Pipelines'],
   },
   {
     num: '04',
-    title: 'Installations',
-    description: 'Physical spaces powered by digital craft. From showrooms to exhibitions, we build interactive pieces that respond to the people in the room.',
-    deliverables: ['Interactive exhibits', 'Projection mapping', 'Sensors & hardware', 'On-site support'],
+    title: 'APP DEVELOPMENT',
+    description: 'We design and develop mobile apps that make your services easy to access and use. From planning and interface design to development and launch, we create apps shaped around your business goals and your users’ needs.',
+    deliverables: ['iOS & Android Apps', 'Mobile UI/UX Design', 'Full-cycle Development', 'App Store Launch'],
   },
 ];
 

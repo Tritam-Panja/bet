@@ -1,79 +1,117 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
+import DecryptedText from './DecryptedText';
 
 export const StudioSection: React.FC = () => {
-  const lineWords1 = ['Transcend', 'anything', 'seen', 'or', 'felt', 'before.'];
-  const lineWords2 = ['We', 'blend', 'art', 'direction,', 'motion', 'and', 'code', 'into', 'experiences', 'people', 'remember,', 'share', 'and', 'return', 'to.'];
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   return (
-    <section id="studio" className="relative w-full py-28 sm:py-36 px-6 sm:px-12 md:px-16 max-w-[1600px] mx-auto border-t border-white/10">
+    <section
+      id="studio"
+      ref={sectionRef}
+      className="relative w-full py-32 sm:py-44 px-6 sm:px-12 md:px-16 max-w-[1600px] mx-auto border-t border-white/10"
+    >
       {/* Section Tag */}
-      <div className="flex items-center justify-between mb-16 sm:mb-24">
-        <span className="font-mono-code text-xs uppercase tracking-widest text-[#d4ff3a]">
-          (01) — The studio
-        </span>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        className="flex items-center justify-between mb-16 sm:mb-24"
+      >
+        <div className="flex items-center gap-3">
+          <span className="w-2 h-2 rounded-full bg-[#d4ff3a] animate-ping" />
+          <span className="font-mono-code text-xs uppercase tracking-widest text-[#d4ff3a]">
+            (01) — The studio
+          </span>
+        </div>
         <span className="font-mono-code text-xs uppercase tracking-widest text-white/40">
-          Barcelona, ES
+          Bramha Evolving Techinfra
         </span>
-      </div>
+      </motion.div>
 
-      {/* Big typography manifesto */}
-      <div className="flex flex-col gap-12 sm:gap-16">
-        <h2 className="font-archivo text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-[#edebd6] leading-[1.05] max-w-5xl">
-          {lineWords1.map((w, idx) => (
-            <motion.span
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.05 }}
-              className="inline-block mr-3 sm:mr-5"
+      {/* Main Manifesto */}
+      <div className="flex flex-col gap-14 sm:gap-20">
+        {/* Headline with DecryptedText Animation */}
+        <div className="max-w-5xl">
+          <h2 className="font-archivo text-4xl sm:text-6xl md:text-7xl lg:text-[84px] font-black uppercase tracking-tight text-[#edebd6] leading-[1.05] select-none">
+            <DecryptedText
+              text="IT OFTEN STARTS WITH A SIMPLE QUESTION: COULD THIS WORK BETTER?"
+              animateOn="inViewHover"
+              effect="scramble"
+              sequential
+              revealDirection="start"
+              speed={45}
+              maxIterations={12}
+              hoverRadius={100}
+              scrambleColor="#d4ff3a"
+              loop={false}
+              useOriginalCharsOnly={false}
+              characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+"
+              className="text-[#edebd6]"
+              encryptedClassName="text-[#d4ff3a]/70 font-mono-code"
+              clickMode="once"
+            />
+          </h2>
+        </div>
+
+        {/* Paragraph 1: Cinema Stagger Rise with DecryptedText on Bramha Evolving Techinfra */}
+        <motion.div
+          initial={{ opacity: 0, y: 50, filter: 'blur(8px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl"
+        >
+          <p className="font-inter text-xl sm:text-2xl md:text-3xl text-[#edebd6]/85 font-light leading-relaxed">
+            <span className="text-[#d4ff3a] font-normal underline decoration-[#d4ff3a]/40 decoration-1 underline-offset-4">
+              <DecryptedText
+                text="Bramha Evolving Techinfra"
+                animateOn="inViewHover"
+                effect="scramble"
+                sequential
+                revealDirection="start"
+                speed={40}
+                maxIterations={10}
+                hoverRadius={80}
+                scrambleColor="#d4ff3a"
+                loop={false}
+                useOriginalCharsOnly={false}
+                characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+"
+                className="text-[#edebd6] font-normal"
+                encryptedClassName="text-[#d4ff3a]"
+                clickMode="once"
+              />
+            </span>{' '}
+            turns that curiosity into websites, software and AI tools for businesses, and explores renewable energy, robotics and other future technologies.
+          </p>
+        </motion.div>
+
+        {/* Paragraph 2: Horizon Reveal with Accent Divider */}
+        <motion.div
+          initial={{ opacity: 0, y: 50, filter: 'blur(8px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="pt-12 border-t border-white/10 max-w-4xl"
+        >
+          <p className="font-inter text-lg sm:text-xl text-[#edebd6]/70 font-light leading-relaxed">
+            We aim to make useful ideas real and help people and businesses move forward. If that vision speaks to you, we welcome like-minded people and collaborators to connect with us.
+          </p>
+
+          <div className="mt-8 flex items-center gap-4">
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#d4ff3a] hover:text-[#edebd6] transition-colors duration-200"
             >
-              {w}
-            </motion.span>
-          ))}
-        </h2>
-
-        <p className="font-inter text-xl sm:text-2xl md:text-3xl text-[#edebd6]/70 font-light leading-relaxed max-w-4xl">
-          {lineWords2.map((w, idx) => (
-            <motion.span
-              key={idx}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 + idx * 0.03 }}
-              className={`inline-block mr-2 ${
-                ['art', 'motion', 'code', 'remember,'].includes(w.replace(',', ''))
-                  ? 'text-[#edebd6] font-normal underline decoration-[#d4ff3a]/40 decoration-1 underline-offset-4'
-                  : ''
-              }`}
-            >
-              {w}
-            </motion.span>
-          ))}
-        </p>
-      </div>
-
-      {/* Metrics / Key highlights */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-20 mt-20 border-t border-white/5">
-        <div>
-          <div className="font-archivo text-3xl sm:text-4xl font-bold text-[#d4ff3a]">100%</div>
-          <div className="font-mono-code text-xs uppercase tracking-wider text-white/50 mt-2">Custom Real-time 3D</div>
-        </div>
-        <div>
-          <div className="font-archivo text-3xl sm:text-4xl font-bold text-[#edebd6]">60fps</div>
-          <div className="font-mono-code text-xs uppercase tracking-wider text-white/50 mt-2">Fluid Browser Performance</div>
-        </div>
-        <div>
-          <div className="font-archivo text-3xl sm:text-4xl font-bold text-[#edebd6]">15+</div>
-          <div className="font-mono-code text-xs uppercase tracking-wider text-white/50 mt-2">Industry Awards</div>
-        </div>
-        <div>
-          <div className="font-archivo text-3xl sm:text-4xl font-bold text-[#edebd6]">Global</div>
-          <div className="font-mono-code text-xs uppercase tracking-wider text-white/50 mt-2">Client Reach</div>
-        </div>
+              <span>Connect with us</span>
+              <span className="transform group-hover:translate-x-1.5 transition-transform duration-200">
+                →
+              </span>
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
 };
-

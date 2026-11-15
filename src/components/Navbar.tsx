@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Navbar: React.FC = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navLinks = [
+    { label: 'Studio', href: '#studio' },
+    { label: 'Services', href: '#services' },
+    { label: 'Work', href: '#work' },
+    { label: 'Contact', href: '#contact' },
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 sm:px-8 py-6 pointer-events-none">
@@ -13,108 +20,96 @@ export const Navbar: React.FC = () => {
           className="flex items-center gap-1 group transition-opacity duration-300 hover:opacity-80"
         >
           <span className="font-archivo text-xl font-bold tracking-tight text-[#edebd6]">
-            NOCTURNO
+            BET
           </span>
           <span className="text-[10px] text-[#d4ff3a] font-mono-code font-bold self-start mt-0.5">
             ®
           </span>
         </a>
 
-        {/* Center Nav Pills (Desktop) */}
-        <nav className="hidden md:flex items-center gap-1.5 p-1.5 rounded-full bg-[#16161a]/80 backdrop-blur-md border border-white/10 shadow-2xl">
-          <a
-            href="#work"
-            className="px-5 py-2 rounded-full text-xs font-mono-code tracking-wider uppercase text-[#edebd6]/70 hover:text-[#0a0a0c] hover:bg-[#d4ff3a] transition-all duration-300"
-          >
-            Work
-          </a>
-          <a
-            href="#studio"
-            className="px-5 py-2 rounded-full text-xs font-mono-code tracking-wider uppercase text-[#edebd6]/70 hover:text-[#0a0a0c] hover:bg-[#d4ff3a] transition-all duration-300"
-          >
-            Studio
-          </a>
-          <a
-            href="#services"
-            className="px-5 py-2 rounded-full text-xs font-mono-code tracking-wider uppercase text-[#edebd6]/70 hover:text-[#0a0a0c] hover:bg-[#d4ff3a] transition-all duration-300"
-          >
-            Services
-          </a>
-          <a
-            href="#contact"
-            className="px-5 py-2 rounded-full text-xs font-mono-code tracking-wider uppercase text-[#edebd6]/70 hover:text-[#0a0a0c] hover:bg-[#d4ff3a] transition-all duration-300"
-          >
-            Contact
-          </a>
-        </nav>
+        {/* Right side Menu Pill with expandable Links & Hamburger Toggle */}
+        <div className="relative flex items-center">
+          <div className="flex items-center p-1.5 rounded-full bg-[#16161a]/85 backdrop-blur-md border border-white/10 shadow-2xl transition-all duration-300">
+            {/* Desktop Slide-out Nav Links */}
+            <AnimatePresence>
+              {isOpen && (
+                <motion.nav
+                  initial={{ width: 0, opacity: 0 }}
+                  animate={{ width: 'auto', opacity: 1 }}
+                  exit={{ width: 0, opacity: 0 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  className="hidden md:flex items-center overflow-hidden pr-2"
+                >
+                  <div className="flex items-center gap-1.5 whitespace-nowrap pl-2">
+                    {navLinks.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className="px-4 py-2 rounded-full text-xs font-mono-code tracking-wider uppercase text-[#edebd6]/70 hover:text-[#0a0a0c] hover:bg-[#d4ff3a] transition-all duration-300"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                </motion.nav>
+              )}
+            </AnimatePresence>
 
-        {/* Right CTA */}
-        <div className="flex items-center gap-4">
-          <a
-            href="#contact"
-            className="hidden sm:inline-flex items-center justify-center h-10 px-6 rounded-full bg-[#d4ff3a] hover:bg-[#edebd6] text-[#0a0a0c] font-mono-code text-xs font-bold tracking-wider uppercase transition-colors duration-300"
-          >
-            Let's talk
-          </a>
+            {/* Hamburger Button (Replaces "Let's Talk") */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle navigation menu"
+              className="group flex items-center gap-2.5 h-10 px-5 rounded-full bg-[#d4ff3a] hover:bg-[#edebd6] text-[#0a0a0c] font-mono-code text-xs font-bold tracking-wider uppercase transition-colors duration-300"
+            >
+              <span className="tracking-widest">
+                {isOpen ? 'CLOSE' : 'MENU'}
+              </span>
+              <div className="flex flex-col justify-center items-center w-4 h-3 gap-1">
+                <span
+                  className={`block h-0.5 w-4 bg-[#0a0a0c] transition-all duration-300 ${
+                    isOpen ? 'rotate-45 translate-y-1.5' : ''
+                  }`}
+                />
+                <span
+                  className={`block h-0.5 w-4 bg-[#0a0a0c] transition-all duration-300 ${
+                    isOpen ? 'opacity-0 scale-0' : ''
+                  }`}
+                />
+                <span
+                  className={`block h-0.5 w-4 bg-[#0a0a0c] transition-all duration-300 ${
+                    isOpen ? '-rotate-45 -translate-y-1.5' : ''
+                  }`}
+                />
+              </div>
+            </button>
+          </div>
 
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden flex items-center justify-center h-10 px-5 rounded-full bg-[#16161a]/90 backdrop-blur-md border border-white/10 text-xs font-mono-code uppercase text-[#edebd6]"
-          >
-            {mobileMenuOpen ? 'Close' : 'Menu'}
-          </button>
+          {/* Mobile Drawer (When screen width < md) */}
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -15, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -15, scale: 0.96 }}
+                transition={{ duration: 0.25 }}
+                className="md:hidden absolute right-0 top-14 w-64 p-5 rounded-2xl bg-[#16161a]/95 backdrop-blur-xl border border-white/10 flex flex-col gap-2 shadow-2xl pointer-events-auto"
+              >
+                {navLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="font-inter text-lg font-semibold py-2.5 px-3 rounded-lg text-[#edebd6] hover:text-[#0a0a0c] hover:bg-[#d4ff3a] transition-all duration-200"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
-
-      {/* Mobile Drawer */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-4 top-20 p-6 rounded-3xl bg-[#16161a] border border-white/10 flex flex-col gap-4 shadow-2xl pointer-events-auto md:hidden"
-          >
-            <a
-              href="#work"
-              onClick={() => setMobileMenuOpen(false)}
-              className="font-inter text-2xl font-bold py-2 border-b border-white/5 text-[#edebd6] hover:text-[#d4ff3a]"
-            >
-              Work
-            </a>
-            <a
-              href="#studio"
-              onClick={() => setMobileMenuOpen(false)}
-              className="font-inter text-2xl font-bold py-2 border-b border-white/5 text-[#edebd6] hover:text-[#d4ff3a]"
-            >
-              Studio
-            </a>
-            <a
-              href="#services"
-              onClick={() => setMobileMenuOpen(false)}
-              className="font-inter text-2xl font-bold py-2 border-b border-white/5 text-[#edebd6] hover:text-[#d4ff3a]"
-            >
-              Services
-            </a>
-            <a
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="font-inter text-2xl font-bold py-2 text-[#edebd6] hover:text-[#d4ff3a]"
-            >
-              Contact
-            </a>
-            <a
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="mt-2 w-full text-center py-4 rounded-full bg-[#d4ff3a] text-[#0a0a0c] font-mono-code text-xs font-bold uppercase tracking-wider"
-            >
-              Let's talk
-            </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
   );
 };
-
