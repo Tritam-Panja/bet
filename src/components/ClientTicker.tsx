@@ -23,7 +23,7 @@ export const ClientTicker: React.FC = () => {
             <span className="font-archivo text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-widest text-[#edebd6]">
               {client}
             </span>
-            <span className="w-2 h-2 rounded-full bg-[#d4ff3a]/60"></span>
+            <span className="w-2 h-2 rounded-full bg-[#B173F0]/60"></span>
           </div>
         ))}
       </div>

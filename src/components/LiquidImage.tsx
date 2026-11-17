@@ -13,6 +13,7 @@ interface LiquidImageProps {
   reveal?: boolean;
   revealDuration?: number;
   cursorFollow?: number;
+  transparentBackground?: boolean;
 }
 
 const VERTEX_SHADER = `
@@ -38,6 +39,7 @@ uniform float uZoom;
 uniform float uPar;
 uniform float uRipple;
 uniform float uRgb;
+uniform float uTransparentBg;
 
 vec2 cover(vec2 uv){
   float rs = uRes.x / uRes.y;
@@ -63,6 +65,18 @@ void main(){
   c.g = texture2D(uTex, t).g;
   c.b = texture2D(uTex, t - vec2(sh, 0.0)).b;
   c.a = 1.0;
+
+  if (uTransparentBg > 0.5) {
+    // Distance from center of the circular sculpture
+    float distFromCenter = distance(vUv, vec2(0.5, 0.5));
+    // Discard the dark outer purple aura halo beyond the bubble
+    float alphaMask = 1.0 - smoothstep(0.355, 0.385, distFromCenter);
+    // Also cut out dark background pixels
+    float luma = dot(c.rgb, vec3(0.299, 0.587, 0.114));
+    float darkMask = smoothstep(0.02, 0.08, luma);
+    c.a = alphaMask * darkMask;
+  }
+
   gl_FragColor = c;
 }
 `;
@@ -80,6 +94,7 @@ export const LiquidImage: React.FC<LiquidImageProps> = ({
   reveal = true,
   revealDuration = 1.6,
   cursorFollow = 0.4,
+  transparentBackground = false,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
@@ -92,8 +107,13 @@ export const LiquidImage: React.FC<LiquidImageProps> = ({
     const canvas = canvasRef.current;
     if (!container || !inner || !canvas || !src) return;
 
-    const gl = canvas.getContext('webgl', { premultipliedAlpha: false, antialias: false, alpha: false });
+    const gl = canvas.getContext('webgl', { premultipliedAlpha: false, antialias: false, alpha: transparentBackground });
     if (!gl) return;
+
+    if (transparentBackground) {
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    }
 
     const compileShader = (type: number, source: string) => {
       const shader = gl.createShader(type);
@@ -127,7 +147,7 @@ export const LiquidImage: React.FC<LiquidImageProps> = ({
     gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
 
     const uniforms: Record<string, WebGLUniformLocation | null> = {};
-    ['uTex', 'uRes', 'uImg', 'uMouse', 'uHover', 'uTime', 'uVel', 'uZoom', 'uPar', 'uRipple', 'uRgb'].forEach(name => {
+    ['uTex', 'uRes', 'uImg', 'uMouse', 'uHover', 'uTime', 'uVel', 'uZoom', 'uPar', 'uRipple', 'uRgb', 'uTransparentBg'].forEach(name => {
       uniforms[name] = gl.getUniformLocation(program, name);
     });
 
@@ -192,8 +212,13 @@ export const LiquidImage: React.FC<LiquidImageProps> = ({
     container.addEventListener('pointerenter', onPointerEnter);
     container.addEventListener('pointerleave', onPointerLeave);
 
+    const isIOS =
+      typeof navigator !== 'undefined' &&
+      (/iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+
     const resize = () => {
-      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      const dpr = Math.min(isIOS ? 1.5 : 2, window.devicePixelRatio || 1);
       const w = Math.max(1, Math.round(container.clientWidth * dpr));
       const h = Math.max(1, Math.round(container.clientHeight * dpr));
       if (canvas.width !== w || canvas.height !== h) {
@@ -265,6 +290,7 @@ export const LiquidImage: React.FC<LiquidImageProps> = ({
       gl.uniform1f(uniforms.uPar, -parOffset);
       gl.uniform1f(uniforms.uRipple, ripple);
       gl.uniform1f(uniforms.uRgb, rgbShift);
+      gl.uniform1f(uniforms.uTransparentBg, transparentBackground ? 1.0 : 0.0);
 
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     };
@@ -281,13 +307,13 @@ export const LiquidImage: React.FC<LiquidImageProps> = ({
       gl.getExtension('WEBGL_lose_context')?.loseContext();
       setLoaded(false);
     };
-  }, [src, radius, ripple, hoverZoom, rgbShift, scrollBend, parallax, reveal, revealDuration, cursorFollow]);
+  }, [src, radius, ripple, hoverZoom, rgbShift, scrollBend, parallax, reveal, revealDuration, cursorFollow, transparentBackground]);
 
   return (
     <div
       ref={containerRef}
       style={{ borderRadius: `${radius}px` }}
-      className={`relative w-full h-full overflow-hidden bg-[#111114] isolate ${className}`}
+      className={`relative w-full h-full overflow-hidden ${transparentBackground ? 'bg-transparent' : 'bg-[#111114]'} isolate ${className}`}
     >
       <div ref={innerRef} className="absolute inset-0 w-full h-full will-change-transform">
         <img

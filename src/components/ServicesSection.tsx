@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import DecryptedText from './DecryptedText';
 
 const SERVICES = [
   {
@@ -34,11 +35,27 @@ export const ServicesSection: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20 sm:mb-28">
         <div>
-          <span className="font-mono-code text-xs uppercase tracking-widest text-[#d4ff3a] block mb-3">
+          <span className="font-mono-code text-xs uppercase tracking-widest text-[#B173F0] block mb-3">
             (02) — What we do
           </span>
           <h2 className="font-archivo text-4xl sm:text-6xl md:text-7xl font-extrabold uppercase tracking-tight text-[#edebd6]">
-            What we do
+            <DecryptedText
+              text="What we do"
+              animateOn="inViewHover"
+              effect="scramble"
+              sequential
+              revealDirection="start"
+              speed={45}
+              maxIterations={12}
+              hoverRadius={80}
+              scrambleColor="#B173F0"
+              loop={false}
+              useOriginalCharsOnly={false}
+              characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+"
+              className="text-[#edebd6]"
+              encryptedClassName="text-[#B173F0]/70 font-mono-code"
+              clickMode="once"
+            />
           </h2>
         </div>
         <p className="font-inter text-base sm:text-lg text-[#edebd6]/70 max-w-md">
@@ -55,11 +72,11 @@ export const ServicesSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: idx * 0.1 }}
-            className="group p-8 sm:p-12 rounded-3xl bg-[#141418]/50 hover:bg-[#18181e]/80 border border-white/10 hover:border-[#d4ff3a]/40 transition-all duration-500 flex flex-col justify-between"
+            className="group p-8 sm:p-12 rounded-3xl bg-[#141418]/50 hover:bg-[#18181e]/80 border border-white/10 hover:border-[#B173F0]/40 transition-all duration-500 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between pb-8 mb-8 border-b border-white/10">
-                <span className="font-mono-code text-sm text-[#d4ff3a] font-bold">
+                <span className="font-mono-code text-sm text-[#B173F0] font-bold">
                   {srv.num}
                 </span>
                 <span className="font-mono-code text-xs text-white/40 uppercase tracking-widest">
@@ -67,7 +84,7 @@ export const ServicesSection: React.FC = () => {
                 </span>
               </div>
 
-              <h3 className="font-archivo text-2xl sm:text-3xl lg:text-4xl font-bold uppercase text-[#edebd6] group-hover:text-[#d4ff3a] transition-colors duration-300">
+              <h3 className="font-archivo text-2xl sm:text-3xl lg:text-4xl font-bold uppercase text-[#edebd6] group-hover:text-[#B173F0] transition-colors duration-300">
                 {srv.title}
               </h3>
 
@@ -83,7 +100,7 @@ export const ServicesSection: React.FC = () => {
                   key={item}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 text-[#edebd6]/70 text-xs font-mono-code tracking-wide"
                 >
-                  <span className="text-[#d4ff3a]">+</span>
+                  <span className="text-[#B173F0]">+</span>
                   <span>{item}</span>
                 </div>
               ))}
@@ -99,7 +116,7 @@ export const ServicesSection: React.FC = () => {
         </h4>
         <a
           href="#contact"
-          className="inline-flex items-center gap-2 font-mono-code text-xs font-bold uppercase tracking-wider text-[#d4ff3a] hover:text-[#edebd6] transition-colors duration-300"
+          className="inline-flex items-center gap-2 font-mono-code text-xs font-bold uppercase tracking-wider text-[#B173F0] hover:text-[#edebd6] transition-colors duration-300"
         >
           Tell us about it <span>→</span>
         </a>

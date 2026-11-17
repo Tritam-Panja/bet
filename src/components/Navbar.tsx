@@ -22,7 +22,7 @@ export const Navbar: React.FC = () => {
           <span className="font-archivo text-xl font-bold tracking-tight text-[#edebd6]">
             BET
           </span>
-          <span className="text-[10px] text-[#d4ff3a] font-mono-code font-bold self-start mt-0.5">
+          <span className="text-[10px] text-[#B173F0] font-mono-code font-bold self-start mt-0.5">
             ®
           </span>
         </a>
@@ -46,7 +46,7 @@ export const Navbar: React.FC = () => {
                         key={link.label}
                         href={link.href}
                         onClick={() => setIsOpen(false)}
-                        className="px-4 py-2 rounded-full text-xs font-mono-code tracking-wider uppercase text-[#edebd6]/70 hover:text-[#0a0a0c] hover:bg-[#d4ff3a] transition-all duration-300"
+                        className="px-4 py-2 rounded-full text-xs font-mono-code tracking-wider uppercase text-[#edebd6]/70 hover:text-[#0a0a0c] hover:bg-[#B173F0] transition-all duration-300"
                       >
                         {link.label}
                       </a>
@@ -60,7 +60,7 @@ export const Navbar: React.FC = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle navigation menu"
-              className="group flex items-center gap-2.5 h-10 px-5 rounded-full bg-[#d4ff3a] hover:bg-[#edebd6] text-[#0a0a0c] font-mono-code text-xs font-bold tracking-wider uppercase transition-colors duration-300"
+              className="group flex items-center gap-2.5 h-10 px-5 rounded-full bg-[#B173F0] hover:bg-[#edebd6] text-[#0a0a0c] font-mono-code text-xs font-bold tracking-wider uppercase transition-colors duration-300"
             >
               <span className="tracking-widest">
                 {isOpen ? 'CLOSE' : 'MENU'}
@@ -100,7 +100,7 @@ export const Navbar: React.FC = () => {
                     key={link.label}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="font-inter text-lg font-semibold py-2.5 px-3 rounded-lg text-[#edebd6] hover:text-[#0a0a0c] hover:bg-[#d4ff3a] transition-all duration-200"
+                    className="font-inter text-lg font-semibold py-2.5 px-3 rounded-lg text-[#edebd6] hover:text-[#0a0a0c] hover:bg-[#B173F0] transition-all duration-200"
                   >
                     {link.label}
                   </a>

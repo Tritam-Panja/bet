@@ -35,6 +35,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isEntered = true }) =>
           rgbShift={1.4}
           scrollBend={1.0}
           parallax={0.8}
+          transparentBackground={true}
         />
       </motion.div>
 
@@ -47,7 +48,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isEntered = true }) =>
           transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="mb-4 sm:mb-6"
         >
-          <span className="font-mono-code text-xs sm:text-sm uppercase tracking-[0.25em] text-[#d4ff3a] font-semibold">
+          <span className="font-mono-code text-xs sm:text-sm uppercase tracking-[0.25em] text-[#B173F0] font-semibold">
             Welcome to
           </span>
         </motion.div>
@@ -82,7 +83,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isEntered = true }) =>
         >
           <p className="font-archivo text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold uppercase text-[#edebd6]/80 tracking-tight leading-snug">
             The next big possibility{' '}
-            <span className="text-[#d4ff3a] underline decoration-[#d4ff3a]/40 decoration-2 underline-offset-4">
+            <span className="text-[#B173F0] underline decoration-[#B173F0]/40 decoration-2 underline-offset-4">
               will start with you
             </span>
           </p>
@@ -98,7 +99,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isEntered = true }) =>
       >
         {/* Scroll down indicator */}
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-[#d4ff3a] animate-bounce">
+          <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-[#B173F0] animate-bounce">
             ↓
           </div>
           <span className="font-mono-code text-xs uppercase tracking-widest text-[#edebd6]/60">

@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 export interface RingFieldProps {
   /**
    * Color of inner dust / core glow
-   * @default '#d4ff3a'
+   * @default '#B173F0'
    */
   innerColor?: string;
   /**
@@ -64,7 +64,7 @@ interface DustParticle {
 }
 
 export const RingField: React.FC<RingFieldProps> = ({
-  innerColor = '#d4ff3a',
+  innerColor = '#B173F0',
   outerColor = '#cfc6ff',
   backgroundColor = '#08080a',
   ringCount = 9,
@@ -95,8 +95,13 @@ export const RingField: React.FC<RingFieldProps> = ({
     let lastMouse = { x: 0, y: 0 };
     let hasPointerMoved = false;
 
+    const isIOS =
+      typeof navigator !== 'undefined' &&
+      (/iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+
     const resize = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, isIOS ? 1.5 : 2);
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.width = Math.round(width * dpr);
@@ -182,7 +187,7 @@ export const RingField: React.FC<RingFieldProps> = ({
       // Cursor gentle interaction aura / soft light field
       if (hasPointerMoved) {
         const aura = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 220);
-        aura.addColorStop(0, 'rgba(212, 255, 58, 0.05)');
+        aura.addColorStop(0, 'rgba(177, 115, 240, 0.05)');
         aura.addColorStop(0.5, 'rgba(207, 198, 255, 0.02)');
         aura.addColorStop(1, 'rgba(8, 8, 10, 0)');
         ctx.fillStyle = aura;
@@ -237,7 +242,7 @@ export const RingField: React.FC<RingFieldProps> = ({
         // Color selection based on type
         const rgb =
           p.colorType === 'lime'
-            ? '212, 255, 58'
+            ? '177, 115, 240'
             : p.colorType === 'lavender'
             ? '207, 198, 255'
             : p.colorType === 'amber'

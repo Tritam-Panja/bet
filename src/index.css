@@ -5,7 +5,7 @@
     --bg-base: #0a0a0c;
     --text-primary: #edebd6;
     --text-muted: rgba(237, 235, 214, 0.55);
-    --accent: #d4ff3a;
+    --accent: #B173F0;
     --accent-light: #cfc6ff;
     --border-line: rgba(255, 255, 255, 0.08);
   }
@@ -31,6 +31,10 @@
 }
 
 /* Lenis styles */
+html, body {
+  -webkit-overflow-scrolling: touch;
+}
+
 html.lenis, html.lenis body {
   height: auto;
 }

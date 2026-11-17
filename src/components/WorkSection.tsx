@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { LiquidImage } from './LiquidImage';
+import DecryptedText from './DecryptedText';
 
 export interface Project {
   id: string;
@@ -60,11 +61,27 @@ export const WorkSection: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 sm:mb-24">
         <div>
-          <span className="font-mono-code text-xs uppercase tracking-widest text-[#d4ff3a] block mb-3">
+          <span className="font-mono-code text-xs uppercase tracking-widest text-[#B173F0] block mb-3">
             (03) — Selected work
           </span>
           <h2 className="font-archivo text-4xl sm:text-6xl md:text-7xl font-extrabold uppercase tracking-tight text-[#edebd6]">
-            Case studies 2025 — 2026
+            <DecryptedText
+              text="Case studies 2025 — 2026"
+              animateOn="inViewHover"
+              effect="scramble"
+              sequential
+              revealDirection="start"
+              speed={45}
+              maxIterations={12}
+              hoverRadius={80}
+              scrambleColor="#B173F0"
+              loop={false}
+              useOriginalCharsOnly={false}
+              characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+"
+              className="text-[#edebd6]"
+              encryptedClassName="text-[#B173F0]/70 font-mono-code"
+              clickMode="once"
+            />
           </h2>
         </div>
 
@@ -76,7 +93,7 @@ export const WorkSection: React.FC = () => {
               onClick={() => setActiveCategory(cat)}
               className={`px-4 py-1.5 rounded-full text-xs font-mono-code uppercase tracking-wider transition-all duration-300 ${
                 activeCategory === cat
-                  ? 'bg-[#d4ff3a] text-[#0a0a0c] font-bold'
+                  ? 'bg-[#B173F0] text-[#0a0a0c] font-bold'
                   : 'bg-white/5 text-[#edebd6]/60 hover:text-[#edebd6] hover:bg-white/10'
               }`}
             >
@@ -118,14 +135,14 @@ export const WorkSection: React.FC = () => {
             {/* Project Details */}
             <div className="lg:col-span-4 flex flex-col gap-6">
               {/* Meta info: Client — Year */}
-              <div className="flex items-center gap-3 font-mono-code text-xs uppercase tracking-wider text-[#d4ff3a]">
+              <div className="flex items-center gap-3 font-mono-code text-xs uppercase tracking-wider text-[#B173F0]">
                 <span>{project.client}</span>
                 <span className="text-white/30">—</span>
                 <span className="text-white/60">{project.year}</span>
               </div>
 
               {/* Title */}
-              <h3 className="font-archivo text-3xl sm:text-4xl md:text-5xl font-bold uppercase text-[#edebd6] group-hover:text-[#d4ff3a] transition-colors duration-300">
+              <h3 className="font-archivo text-3xl sm:text-4xl md:text-5xl font-bold uppercase text-[#edebd6] group-hover:text-[#B173F0] transition-colors duration-300">
                 {project.title}
               </h3>
 
@@ -148,7 +165,7 @@ export const WorkSection: React.FC = () => {
 
               {/* View Case Study CTA link */}
               <div className="pt-2">
-                <span className="inline-flex items-center gap-2 text-xs font-mono-code uppercase tracking-widest text-[#edebd6] group-hover:text-[#d4ff3a] group-hover:translate-x-2 transition-all duration-300">
+                <span className="inline-flex items-center gap-2 text-xs font-mono-code uppercase tracking-widest text-[#edebd6] group-hover:text-[#B173F0] group-hover:translate-x-2 transition-all duration-300">
                   Explore Project <span>→</span>
                 </span>
               </div>
@@ -169,7 +186,7 @@ export const WorkSection: React.FC = () => {
         </div>
         <a
           href="#contact"
-          className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#d4ff3a] hover:bg-[#edebd6] text-[#0a0a0c] font-mono-code text-xs font-bold uppercase tracking-wider transition-colors duration-300 whitespace-nowrap"
+          className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#B173F0] hover:bg-[#edebd6] text-[#0a0a0c] font-mono-code text-xs font-bold uppercase tracking-wider transition-colors duration-300 whitespace-nowrap"
         >
           See all projects <span>→</span>
         </a>

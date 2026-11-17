@@ -35,7 +35,7 @@ export const SmokeBackground: React.FC = () => {
     let hasInteracted = false;
 
     // Palette: Lime accents, lavender stars, muted soft glow
-    const colors = ['#d4ff3a', '#cfc6ff', '#ffffff', '#e2ffa3', '#b3a5ff'];
+    const colors = ['#B173F0', '#cfc6ff', '#ffffff', '#e2ffa3', '#b3a5ff'];
 
     // Create 75 floating particles
     const particleCount = 75;
@@ -93,7 +93,7 @@ export const SmokeBackground: React.FC = () => {
           glowRadius
         );
         radialGlow.addColorStop(0, 'rgba(207, 198, 255, 0.22)');
-        radialGlow.addColorStop(0.3, 'rgba(212, 255, 58, 0.08)');
+        radialGlow.addColorStop(0.3, 'rgba(177, 115, 240, 0.08)');
         radialGlow.addColorStop(0.7, 'rgba(207, 198, 255, 0.02)');
         radialGlow.addColorStop(1, 'rgba(10, 10, 12, 0)');
         

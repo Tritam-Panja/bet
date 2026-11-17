@@ -25,6 +25,18 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // Detect iOS (iPhone / iPad / iPod) or touch devices where native momentum scroll is superior
+    const isTouchOrIOS =
+      typeof window !== 'undefined' &&
+      (('ontouchstart' in window) ||
+        navigator.maxTouchPoints > 0 ||
+        /iPad|iPhone|iPod/.test(navigator.userAgent));
+
+    if (isTouchOrIOS) {
+      // Allow iOS Safari native elastic momentum scrolling (prevents scroll locking)
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -45,7 +57,7 @@ function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen w-full bg-transparent text-[#edebd6] overflow-x-hidden selection:bg-[#d4ff3a] selection:text-[#0a0a0c]">
+    <div className="relative min-h-screen w-full bg-transparent text-[#edebd6] overflow-x-hidden selection:bg-[#B173F0] selection:text-[#0a0a0c]">
       {/* Intro Preloader with Cipher Text Reveal & Enter button */}
       {!hasEntered && (
         <Preloader onEnter={handleEnter} />
@@ -53,7 +65,7 @@ function App() {
 
       {/* Ring Field Ambient Particle Background */}
       <RingField
-        innerColor="#d4ff3a"
+        innerColor="#B173F0"
         outerColor="#cfc6ff"
         backgroundColor="#08080a"
         ringCount={9}
@@ -66,7 +78,7 @@ function App() {
 
       {/* Adaptive Custom Cursor */}
       <CustomCursor
-        color="rgb(212, 255, 58)"
+        color="rgb(177, 115, 240)"
         dotSize={8}
         ringSize={36}
         linkSize={64}

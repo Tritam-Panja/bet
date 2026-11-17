@@ -15,7 +15,7 @@ interface CustomCursorProps {
 }
 
 export const CustomCursor: React.FC<CustomCursorProps> = ({
-  color = 'rgb(212, 255, 58)',
+  color = 'rgb(177, 115, 240)',
   dotSize = 8,
   ringSize = 36,
   linkSize = 64,

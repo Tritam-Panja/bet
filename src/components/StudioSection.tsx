@@ -20,8 +20,8 @@ export const StudioSection: React.FC = () => {
         className="flex items-center justify-between mb-16 sm:mb-24"
       >
         <div className="flex items-center gap-3">
-          <span className="w-2 h-2 rounded-full bg-[#d4ff3a] animate-ping" />
-          <span className="font-mono-code text-xs uppercase tracking-widest text-[#d4ff3a]">
+          <span className="w-2 h-2 rounded-full bg-[#B173F0] animate-ping" />
+          <span className="font-mono-code text-xs uppercase tracking-widest text-[#B173F0]">
             (01) — The studio
           </span>
         </div>
@@ -44,12 +44,12 @@ export const StudioSection: React.FC = () => {
               speed={45}
               maxIterations={12}
               hoverRadius={100}
-              scrambleColor="#d4ff3a"
+              scrambleColor="#B173F0"
               loop={false}
               useOriginalCharsOnly={false}
               characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+"
               className="text-[#edebd6]"
-              encryptedClassName="text-[#d4ff3a]/70 font-mono-code"
+              encryptedClassName="text-[#B173F0]/70 font-mono-code"
               clickMode="once"
             />
           </h2>
@@ -64,7 +64,7 @@ export const StudioSection: React.FC = () => {
           className="max-w-4xl"
         >
           <p className="font-inter text-xl sm:text-2xl md:text-3xl text-[#edebd6]/85 font-light leading-relaxed">
-            <span className="text-[#d4ff3a] font-normal underline decoration-[#d4ff3a]/40 decoration-1 underline-offset-4">
+            <span className="text-[#B173F0] font-normal underline decoration-[#B173F0]/40 decoration-1 underline-offset-4">
               <DecryptedText
                 text="Bramha Evolving Techinfra"
                 animateOn="inViewHover"
@@ -74,12 +74,12 @@ export const StudioSection: React.FC = () => {
                 speed={40}
                 maxIterations={10}
                 hoverRadius={80}
-                scrambleColor="#d4ff3a"
+                scrambleColor="#B173F0"
                 loop={false}
                 useOriginalCharsOnly={false}
                 characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+"
                 className="text-[#edebd6] font-normal"
-                encryptedClassName="text-[#d4ff3a]"
+                encryptedClassName="text-[#B173F0]"
                 clickMode="once"
               />
             </span>{' '}
@@ -102,7 +102,7 @@ export const StudioSection: React.FC = () => {
           <div className="mt-8 flex items-center gap-4">
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#d4ff3a] hover:text-[#edebd6] transition-colors duration-200"
+              className="group inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#B173F0] hover:text-[#edebd6] transition-colors duration-200"
             >
               <span>Connect with us</span>
               <span className="transform group-hover:translate-x-1.5 transition-transform duration-200">
